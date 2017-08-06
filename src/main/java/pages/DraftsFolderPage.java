@@ -9,16 +9,12 @@ import org.openqa.selenium.WebDriver;
 public class DraftsFolderPage extends AbstractPage {
     private static final By DRAFT_MAIL_LOCATOR = By.xpath(".//span[contains(text(), 'mentoring task')]");
 
-    public DraftsFolderPage(WebDriver driver) {
-        super(driver);
-    }
-
     public boolean isDraftMailDisplayed() {
-        return !driver.findElements(DRAFT_MAIL_LOCATOR).isEmpty();
+        return isElementPresent(DRAFT_MAIL_LOCATOR);
     }
 
     public WriteMailPage openDraftMail() {
         driver.findElement(DRAFT_MAIL_LOCATOR).click();
-        return new WriteMailPage(driver);
+        return new WriteMailPage();
     }
 }

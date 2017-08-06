@@ -4,19 +4,25 @@ package business_objects;
  * Created by User on 08.07.2017.
  */
 public class Mail {
-    private static final String RECIPIENT = "dina_abdykasheva@mail.ru";
-    private static final String SUBJECT = "mentoring task";
-    private static final String BODY = "bodytext";
+    private String recipient;
+    private String subject;
+    private String body;
 
-    public String getRECIPIENT() {
-        return RECIPIENT;
+    public Mail(String recipient, String subject, String body) {
+        this.recipient = recipient;
+        this.subject = subject;
+        this.body = body;
     }
 
-    public String getSUBJECT() {
-        return SUBJECT;
+    public String getRecipient() {
+        return recipient;
     }
 
-    public String getBODY() {
-        return BODY;
+    public String getSubject() {
+        return subject;
+    }
+
+    public String getBody() {
+        return body;
     }
 }

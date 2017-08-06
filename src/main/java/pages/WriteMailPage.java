@@ -22,20 +22,16 @@ public class WriteMailPage extends AbstractPage{
     private static final By MAIL_IS_SENT_LOCATOR = By.xpath(".//div[contains (text(), 'Письмо отправлено')]");
     private static final By DIALOG_WINDOW_LOCATOR = By.xpath(".//div[@role = 'dialog']");
 
-    public WriteMailPage(WebDriver driver) {
-        super(driver);
-    }
-
     public DraftsFolderPage writeMailAndSaveToDraft(Mail mail) {
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(DIALOG_WINDOW_LOCATOR));
-        wait.until(ExpectedConditions.visibilityOfElementLocated(TO_FIELD_LOCATOR)).sendKeys(mail.getRECIPIENT());
-        driver.findElement(SUBJECT_FIELD_LOCATOR).sendKeys(mail.getSUBJECT());
-        driver.findElement(BODY_FIELD_LOCATOR).sendKeys(mail.getBODY());
-        wait.until(ExpectedConditions.visibilityOfElementLocated(SAVING_LABEL_LOCATOR));
+        waitForElementPresent(ExpectedConditions.visibilityOfElementLocated(DIALOG_WINDOW_LOCATOR));
+        waitForElementPresent(ExpectedConditions.visibilityOfElementLocated(TO_FIELD_LOCATOR));
+        driver.findElement(TO_FIELD_LOCATOR).sendKeys(mail.getRecipient());
+        driver.findElement(SUBJECT_FIELD_LOCATOR).sendKeys(mail.getSubject());
+        driver.findElement(BODY_FIELD_LOCATOR).sendKeys(mail.getBody());
+        waitForElementPresent(ExpectedConditions.visibilityOfElementLocated(SAVING_LABEL_LOCATOR));
         driver.findElement(CLOSE_WRITE_MAIL_WINDOW_LOCATOR).click();
         driver.findElement(DRAFTS_FOLDER_LOCATOR).click();
-        return new DraftsFolderPage(driver);
+        return new DraftsFolderPage();
     }
 
     public String getReceiver() {
@@ -52,10 +48,9 @@ public class WriteMailPage extends AbstractPage{
 
     public AccountPage sendMail() {
         driver.findElement(SEND_MAIL_BUTTON_LOCATOR).click();
-        WebDriverWait wait = new WebDriverWait(driver, 10);
-        wait.until(ExpectedConditions.visibilityOfElementLocated(MAIL_IS_SENT_LOCATOR));
+        waitForElementPresent(ExpectedConditions.visibilityOfElementLocated(MAIL_IS_SENT_LOCATOR));
         Logger.info("Mail was successfully sent");
-        return new AccountPage(driver);
+        return new AccountPage();
     }
 
 }

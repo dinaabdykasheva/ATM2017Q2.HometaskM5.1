@@ -4,16 +4,19 @@ package business_objects;
  * Created by User on 08.07.2017.
  */
 public class User {
-    private static final String USERNAME = "test.da.10062017";
-    private static final String PASSWORD = "testtest01";
+    private String username;
+    private String password;
 
-    public String getUSERNAME() {
-        return USERNAME;
+    public String getUsername() {
+        return username;
     }
 
-    public String getPASSWORD() {
-        return PASSWORD;
+    public String getPassword() {
+        return password;
     }
 
-
+    public User(String username, String password) {
+        this.username = username;
+        this.password = password;
+    }
 }
