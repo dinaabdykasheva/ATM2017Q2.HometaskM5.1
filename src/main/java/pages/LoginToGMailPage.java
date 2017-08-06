@@ -2,9 +2,7 @@ package pages;
 
 import business_objects.User;
 import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 
 /**
  * Created by Dina_Abdykasheva on 6/15/2017.

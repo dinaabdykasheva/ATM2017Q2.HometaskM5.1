@@ -1,17 +1,10 @@
 package test;
 
-import business_objects.Mail;
 import business_objects.User;
-import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.AfterClass;
-import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.*;
-
-import java.util.concurrent.TimeUnit;
 
 /**
  * Created by Dina_Abdykasheva on 6/15/2017.
