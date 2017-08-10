@@ -5,17 +5,15 @@ import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
 import pages.*;
+import utils.BrowserStartAndClose;
 
 /**
  * Created by User on 06.08.2017.
  */
-public class DeleteSentMailTest extends AbstractPage {
+public class DeleteSentMailTest extends BrowserStartAndClose {
     public AccountPage accountPage;
     public SentFolderPage sentFolderPage;
     public SentMailPage sentMailPage;
-
-    public DeleteSentMailTest() {
-    }
 
     @Test(description = "loginToAccountTest", priority = 0)
     @Parameters({"username", "password"})
