@@ -6,10 +6,10 @@ import org.testng.annotations.AfterClass;
 /**
  * Created by Dina_Abdykasheva on 8/10/2017.
  */
-public class BrowserStartAndClose {
+public class BaseTest {
     public WebDriver driver;
 
-    public BrowserStartAndClose() {
+    public BaseTest() {
         this.driver = WebDriverSingleton.getWebDriverInstance();
     }
 
