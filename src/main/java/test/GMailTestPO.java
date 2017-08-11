@@ -12,16 +12,16 @@ import utils.BaseTest;
  * Created by Dina_Abdykasheva on 6/15/2017.
  */
 public class GMailTestPO extends BaseTest {
-    public DraftsFolderPage writeMail, openDraftFolder, draftsFolder;
-    public WriteMailPage openSavedDraft, writeMailPage;
+    public DraftsFolderPage writeMail, openDraftFolder;
+    public WriteMailPage openSavedDraft;
     public SentFolderPage sendMail;
-    public LoginToGMailPage login,exitGMail;
+    public LoginToGMailPage exitGMail;
     public AccountPage accountPage;
 
     @Test(description = "loginToAccountTest", priority = 0)
     @Parameters({"username", "password"})
     public void loginToAccountTest(String username, String password) {
-        accountPage = login.loginToGMail(new User(username, password));
+        accountPage = new LoginToGMailPage().loginToGMail(new User(username, password));
         boolean isAccountIconPresent = accountPage.isAccountIconPresent();
         Assert.assertTrue(isAccountIconPresent, "User isn't logged in");
     }
@@ -37,7 +37,7 @@ public class GMailTestPO extends BaseTest {
     @Test(description = "VerifySavedDraftReceiverTest", dependsOnMethods = "saveToDraftTest")
     @Parameters({"recipient"})
     public void verifySavedDraftReceiverTest(String recipient) {
-        openSavedDraft = draftsFolder.openDraftMail();
+        openSavedDraft = new DraftsFolderPage().openDraftMail();
         String receiver = openSavedDraft.getReceiver();
         Assert.assertEquals(recipient, receiver, "Receiver isn't valid");
     }
@@ -45,20 +45,20 @@ public class GMailTestPO extends BaseTest {
     @Test(description = "VerifySavedDraftSubjectTest", dependsOnMethods = "verifySavedDraftReceiverTest")
     @Parameters({"subject"})
     public void verifySavedDraftSubjectTest(String subject) {
-        String mailSubject = writeMailPage.getSubject();
+        String mailSubject = new WriteMailPage().getSubject();
         Assert.assertEquals(subject, mailSubject, "Subject isn't valid");
     }
 
     @Test(description = "VerifySavedDraftBodyTest", dependsOnMethods = "verifySavedDraftSubjectTest")
     @Parameters({"body"})
     public void verifySavedDraftBodyTest(String body) {
-        String mailBody = writeMailPage.getBody();
+        String mailBody = new WriteMailPage().getBody();
         Assert.assertEquals(body, mailBody, "Body isn't valid");
     }
 
     @Test(description = "isMailSent", dependsOnMethods = {"verifySavedDraftReceiverTest", "verifySavedDraftSubjectTest", "verifySavedDraftBodyTest"})
     public void isMailSent() {
-        sendMail = writeMailPage.sendMail().openSentMail();
+        sendMail = new WriteMailPage().sendMail().openSentMail();
         boolean isMailSent = sendMail.isMailSent();
         Assert.assertTrue(isMailSent, "Mail wasn't sent");
     }
@@ -70,7 +70,7 @@ public class GMailTestPO extends BaseTest {
         Assert.assertFalse(isMailDeletedFromDrafts, "Mail isn't deleted from drafts");
     }
 
-    @Test(description = "ExitGMailTest", dependsOnMethods = "isMailSent")
+    @Test(description = "ExitGMailTest", alwaysRun = true)
     public void exitGMailTest() {
         exitGMail = accountPage.exitGMail();
         boolean isUserLoggedOff = exitGMail.isUserLoggedOff();
