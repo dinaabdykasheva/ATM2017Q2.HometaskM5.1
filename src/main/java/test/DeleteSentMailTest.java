@@ -1,11 +1,13 @@
 package test;
 
-import business_objects.User;
+import app.business_objects.User;
+import app.pages.AccountPage;
+import app.pages.LoginToGMailPage;
+import app.pages.SentFolderPage;
+import app.pages.SentMailPage;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.*;
-import utils.BaseTest;
 
 /**
  * Created by User on 06.08.2017.

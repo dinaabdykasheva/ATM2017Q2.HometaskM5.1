@@ -1,5 +1,6 @@
-package utils;
+package test;
 
+import core.driver.WebDriverSingleton;
 import org.openqa.selenium.WebDriver;
 import org.testng.annotations.AfterClass;
 

@@ -1,4 +1,4 @@
-package business_objects;
+package app.business_objects;
 
 /**
  * Created by User on 08.07.2017.

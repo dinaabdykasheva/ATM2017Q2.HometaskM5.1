@@ -1,13 +1,15 @@
-package pages;
+package app.pages;
 
-import business_objects.User;
+import app.business_objects.User;
+import core.service.GlobalProperties;
+import core.utils.Waiter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 
 /**
  * Created by Dina_Abdykasheva on 6/15/2017.
  */
-public class LoginToGMailPage extends AbstractPage{
+public class LoginToGMailPage extends AbstractPage {
     private static final By USERNAME_INPUT_LOCATOR = By.name("identifier");
     private static final By NEXT_BUTTON_LOCATOR = By.id("identifierNext");
     private static final By PASSWORD_INPUT_LOCATOR = By.name("password");
@@ -16,10 +18,10 @@ public class LoginToGMailPage extends AbstractPage{
     private static final By PROFILE_IDENTIFIER_LOCATOR = By.id("profileIdentifier");
 
     public AccountPage loginToGMail(User user) {
-        driver.get("https://www.google.com/gmail");
+        driver.get(GlobalProperties.getURL());
         driver.findElement(USERNAME_INPUT_LOCATOR).sendKeys(user.getUsername());
         driver.findElement(NEXT_BUTTON_LOCATOR).click();
-        waitForElementPresent(ExpectedConditions.visibilityOfElementLocated(PROFILE_IDENTIFIER_LOCATOR));
+        Waiter.waitForElementPresent(driver, ExpectedConditions.visibilityOfElementLocated(PROFILE_IDENTIFIER_LOCATOR));
         driver.findElement(PASSWORD_INPUT_LOCATOR).sendKeys(user.getPassword());
         driver.findElement(NEXT_BUTTON_LOCATOR1).click();
         return new AccountPage();

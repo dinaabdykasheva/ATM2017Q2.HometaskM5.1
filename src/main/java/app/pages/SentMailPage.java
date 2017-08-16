@@ -1,11 +1,11 @@
-package pages;
+package app.pages;
 
 import org.openqa.selenium.By;
 
 /**
  * Created by User on 06.08.2017.
  */
-public class SentMailPage extends AbstractPage{
+public class SentMailPage extends AbstractPage {
     private static final By DELETE_MAIL_LOCATOR = By.xpath(".//div[@class = 'T-I J-J5-Ji nX T-I-ax7 T-I-Js-Gs ar7 T-I-JW']");
     private static final By MAIL_IS_DELETED_LOCATOR = By.xpath(".//span[contains(text(), 'Цепочка отправлена в корзину.')]");
     private static final By SET_LABEL_LOCATOR = By.xpath(".//div[contains(text(), 'Ярлыки')]");

@@ -1,7 +1,7 @@
-package pages;
+package app.pages;
 
 import org.openqa.selenium.By;
-import utils.Logger;
+import core.utils.Logger;
 
 /**
  * Created by Dina_Abdykasheva on 6/15/2017.

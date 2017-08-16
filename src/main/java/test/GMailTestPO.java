@@ -1,12 +1,11 @@
 package test;
 
-import business_objects.Mail;
-import business_objects.User;
+import app.business_objects.Mail;
+import app.business_objects.User;
+import app.pages.*;
 import org.testng.Assert;
 import org.testng.annotations.Parameters;
 import org.testng.annotations.Test;
-import pages.*;
-import utils.BaseTest;
 
 /**
  * Created by Dina_Abdykasheva on 6/15/2017.
@@ -17,6 +16,7 @@ public class GMailTestPO extends BaseTest {
     public SentFolderPage sendMail;
     public LoginToGMailPage exitGMail;
     public AccountPage accountPage;
+    public Mail mail;
 
     @Test(description = "loginToAccountTest", priority = 0)
     @Parameters({"username", "password"})
@@ -29,9 +29,10 @@ public class GMailTestPO extends BaseTest {
     @Test(description = "SaveToDraftTest", dependsOnMethods = "loginToAccountTest")
     @Parameters({"recipient", "subject", "body"})
     public void saveToDraftTest(String recipient, String subject, String body) {
-        writeMail = accountPage.clickWriteMailButton().writeMailAndSaveToDraft(new Mail(recipient, subject, body));
-        boolean isDraftMailSaved = writeMail.isDraftMailDisplayed();
-        Assert.assertTrue(isDraftMailSaved, "Mail isn't saved in drafts");
+        mail = new Mail(recipient, subject, body);
+        writeMail = accountPage.clickWriteMailButton().writeMailAndSaveToDraft(mail);
+        boolean isDraftMailSaved = writeMail.isDraftMailDisplayed(mail);
+        Assert.assertTrue(isDraftMailSaved, "mentoring task");
     }
 
     @Test(description = "VerifySavedDraftReceiverTest", dependsOnMethods = "saveToDraftTest")
@@ -59,14 +60,14 @@ public class GMailTestPO extends BaseTest {
     @Test(description = "isMailSent", dependsOnMethods = {"verifySavedDraftReceiverTest", "verifySavedDraftSubjectTest", "verifySavedDraftBodyTest"})
     public void isMailSent() {
         sendMail = new WriteMailPage().sendMail().openSentMail();
-        boolean isMailSent = sendMail.isMailSent();
+        boolean isMailSent = sendMail.isMailSent(mail);
         Assert.assertTrue(isMailSent, "Mail wasn't sent");
     }
 
-    @Test(description = "MailIsDeletedFromDraftsTest", dependsOnMethods = "isMailSent")
+    @Test(description = "MailIsDeletedFromDraftsTest")
     public void mailIsDeletedFromDraftsTest() {
         openDraftFolder = accountPage.openDrafts();
-        boolean isMailDeletedFromDrafts = openDraftFolder.isDraftMailDisplayed();
+        boolean isMailDeletedFromDrafts = openDraftFolder.isDraftMailDisplayed(mail);
         Assert.assertFalse(isMailDeletedFromDrafts, "Mail isn't deleted from drafts");
     }
 
