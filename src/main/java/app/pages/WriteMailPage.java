@@ -1,6 +1,7 @@
 package app.pages;
 
 import app.business_objects.Mail;
+import core.driver.WebDriverSingleton;
 import core.utils.Waiter;
 import org.openqa.selenium.By;
 import org.openqa.selenium.support.ui.ExpectedConditions;
@@ -22,32 +23,32 @@ public class WriteMailPage extends AbstractPage {
     private static final By DIALOG_WINDOW_LOCATOR = By.xpath(".//div[@role = 'dialog']");
 
     public DraftsFolderPage writeMailAndSaveToDraft(Mail mail) {
-        Waiter.waitForElementPresent(driver,ExpectedConditions.visibilityOfElementLocated(DIALOG_WINDOW_LOCATOR));
-        Waiter.waitForElementPresent(driver, ExpectedConditions.visibilityOfElementLocated(TO_FIELD_LOCATOR));
-        driver.findElement(TO_FIELD_LOCATOR).sendKeys(mail.getRecipient());
-        driver.findElement(SUBJECT_FIELD_LOCATOR).sendKeys(mail.getSubject());
-        driver.findElement(BODY_FIELD_LOCATOR).sendKeys(mail.getBody());
-        Waiter.waitForElementPresent(driver, ExpectedConditions.visibilityOfElementLocated(SAVING_LABEL_LOCATOR));
-        driver.findElement(CLOSE_WRITE_MAIL_WINDOW_LOCATOR).click();
-        driver.findElement(DRAFTS_FOLDER_LOCATOR).click();
+        Waiter.waitForElementPresent(WebDriverSingleton.getWebDriverInstance(),ExpectedConditions.visibilityOfElementLocated(DIALOG_WINDOW_LOCATOR));
+        Waiter.waitForElementPresent(WebDriverSingleton.getWebDriverInstance(), ExpectedConditions.visibilityOfElementLocated(TO_FIELD_LOCATOR));
+        WebDriverSingleton.getWebDriverInstance().findElement(TO_FIELD_LOCATOR).sendKeys(mail.getRecipient());
+        WebDriverSingleton.getWebDriverInstance().findElement(SUBJECT_FIELD_LOCATOR).sendKeys(mail.getSubject());
+        WebDriverSingleton.getWebDriverInstance().findElement(BODY_FIELD_LOCATOR).sendKeys(mail.getBody());
+        Waiter.waitForElementPresent(WebDriverSingleton.getWebDriverInstance(), ExpectedConditions.visibilityOfElementLocated(SAVING_LABEL_LOCATOR));
+        WebDriverSingleton.getWebDriverInstance().findElement(CLOSE_WRITE_MAIL_WINDOW_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().findElement(DRAFTS_FOLDER_LOCATOR).click();
         return new DraftsFolderPage();
     }
 
     public String getReceiver() {
-        return driver.findElement(TO_FIELD_IN_DRAFT_LOCATOR).getAttribute("email");
+        return WebDriverSingleton.getWebDriverInstance().findElement(TO_FIELD_IN_DRAFT_LOCATOR).getAttribute("email");
     }
 
     public String getSubject() {
-        return driver.findElement(SUBJECT_FIELD_LOCATOR).getAttribute("value");
+        return WebDriverSingleton.getWebDriverInstance().findElement(SUBJECT_FIELD_LOCATOR).getAttribute("value");
     }
 
     public String getBody() {
-        return driver.findElement(BODY_FIELD_LOCATOR).getText();
+        return WebDriverSingleton.getWebDriverInstance().findElement(BODY_FIELD_LOCATOR).getText();
     }
 
     public AccountPage sendMail() {
-        driver.findElement(SEND_MAIL_BUTTON_LOCATOR).click();
-        Waiter.waitForElementPresent(driver, ExpectedConditions.visibilityOfElementLocated(MAIL_IS_SENT_LOCATOR));
+        WebDriverSingleton.getWebDriverInstance().findElement(SEND_MAIL_BUTTON_LOCATOR).click();
+        Waiter.waitForElementPresent(WebDriverSingleton.getWebDriverInstance(), ExpectedConditions.visibilityOfElementLocated(MAIL_IS_SENT_LOCATOR));
         Logger.info("Mail was successfully sent");
         return new AccountPage();
     }

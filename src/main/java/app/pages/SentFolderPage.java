@@ -1,6 +1,8 @@
 package app.pages;
 
 import app.business_objects.Mail;
+import core.driver.WebDriverSingleton;
+import core.service.MailService;
 import org.openqa.selenium.By;
 
 /**
@@ -10,11 +12,11 @@ public class SentFolderPage extends AbstractPage {
     private static final By SENT_MAIL_LOCATOR = By.className("bog");
 
     public boolean isMailSent(Mail mail) {
-        return isMailPresent(SENT_MAIL_LOCATOR, mail);
+        return new MailService().isMailPresent(SENT_MAIL_LOCATOR, mail);
     }
 
     public SentMailPage openSentMail() {
-        driver.findElement(SENT_MAIL_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().findElement(SENT_MAIL_LOCATOR).click();
         return new SentMailPage();
     }
 }

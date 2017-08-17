@@ -1,5 +1,6 @@
 package app.pages;
 
+import core.driver.WebDriverSingleton;
 import org.openqa.selenium.By;
 
 /**
@@ -13,7 +14,7 @@ public class SentMailPage extends AbstractPage {
     private static final By LABEL_IS_SET_LOCATOR = By.xpath(".//div[contains(text(), 'Цепочка писем помечена ярлыком \"test\".')]");
 
     public SentMailPage deleteSentMail() {
-        driver.findElement(DELETE_MAIL_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().findElement(DELETE_MAIL_LOCATOR).click();
         return this;
     }
 
@@ -22,9 +23,9 @@ public class SentMailPage extends AbstractPage {
     }
 
     public SentMailPage setLabel() {
-        driver.findElement(SET_LABEL_LOCATOR);
-        driver.switchTo().activeElement();
-        driver.findElement(SELECT_LABEL_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().findElement(SET_LABEL_LOCATOR);
+        WebDriverSingleton.getWebDriverInstance().switchTo().activeElement();
+        WebDriverSingleton.getWebDriverInstance().findElement(SELECT_LABEL_LOCATOR).click();
         return this;
     }
 

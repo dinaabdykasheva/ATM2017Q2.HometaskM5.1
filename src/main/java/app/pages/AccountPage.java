@@ -1,5 +1,6 @@
 package app.pages;
 
+import core.driver.WebDriverSingleton;
 import org.openqa.selenium.By;
 import core.utils.Logger;
 
@@ -14,8 +15,8 @@ public class AccountPage extends AbstractPage {
     private static final By EXIT_BUTTON_LOCATOR = By.xpath(".//a[contains(text(), 'Выйти')]");
 
     public WriteMailPage clickWriteMailButton() {
-        driver.findElement(WRITE_MAIL_BUTTON_LOCATOR).click();
-        driver.switchTo().activeElement();
+        WebDriverSingleton.getWebDriverInstance().findElement(WRITE_MAIL_BUTTON_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().switchTo().activeElement();
         return new WriteMailPage();
     }
 
@@ -25,18 +26,18 @@ public class AccountPage extends AbstractPage {
     }
 
     public DraftsFolderPage openDrafts() {
-        driver.findElement(DRAFTS_FOLDER_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().findElement(DRAFTS_FOLDER_LOCATOR).click();
         return new DraftsFolderPage();
     }
 
     public SentFolderPage openSentMail() {
-        driver.findElement(SENT_MAIL_FOLDER_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().findElement(SENT_MAIL_FOLDER_LOCATOR).click();
         return new SentFolderPage();
     }
 
     public LoginToGMailPage exitGMail() {
-        driver.findElement(ACCOUNT_ICON_LOCATOR).click();
-        driver.findElement(EXIT_BUTTON_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().findElement(ACCOUNT_ICON_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().findElement(EXIT_BUTTON_LOCATOR).click();
         return new LoginToGMailPage();
     }
 }

@@ -1,6 +1,8 @@
 package app.pages;
 
 import app.business_objects.Mail;
+import core.driver.WebDriverSingleton;
+import core.service.MailService;
 import org.openqa.selenium.By;
 
 /**
@@ -10,11 +12,11 @@ public class DraftsFolderPage extends AbstractPage {
     private static final By DRAFT_MAIL_LOCATOR = By.className("bog");
 
     public boolean isDraftMailDisplayed(Mail mail) {
-        return isMailPresent(DRAFT_MAIL_LOCATOR, mail);
+        return new MailService().isMailPresent(DRAFT_MAIL_LOCATOR, mail);
     }
 
     public WriteMailPage openDraftMail() {
-        driver.findElement(DRAFT_MAIL_LOCATOR).click();
+        WebDriverSingleton.getWebDriverInstance().findElement(DRAFT_MAIL_LOCATOR).click();
         return new WriteMailPage();
     }
 }

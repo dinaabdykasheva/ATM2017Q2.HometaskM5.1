@@ -1,6 +1,7 @@
 package app.pages;
 
 import app.business_objects.User;
+import core.driver.WebDriverSingleton;
 import core.service.GlobalProperties;
 import core.utils.Waiter;
 import org.openqa.selenium.By;
@@ -18,12 +19,12 @@ public class LoginToGMailPage extends AbstractPage {
     private static final By PROFILE_IDENTIFIER_LOCATOR = By.id("profileIdentifier");
 
     public AccountPage loginToGMail(User user) {
-        driver.get(GlobalProperties.getURL());
-        driver.findElement(USERNAME_INPUT_LOCATOR).sendKeys(user.getUsername());
-        driver.findElement(NEXT_BUTTON_LOCATOR).click();
-        Waiter.waitForElementPresent(driver, ExpectedConditions.visibilityOfElementLocated(PROFILE_IDENTIFIER_LOCATOR));
-        driver.findElement(PASSWORD_INPUT_LOCATOR).sendKeys(user.getPassword());
-        driver.findElement(NEXT_BUTTON_LOCATOR1).click();
+        WebDriverSingleton.getWebDriverInstance().get(GlobalProperties.getURL());
+        WebDriverSingleton.getWebDriverInstance().findElement(USERNAME_INPUT_LOCATOR).sendKeys(user.getUsername());
+        WebDriverSingleton.getWebDriverInstance().findElement(NEXT_BUTTON_LOCATOR).click();
+        Waiter.waitForElementPresent(WebDriverSingleton.getWebDriverInstance(), ExpectedConditions.visibilityOfElementLocated(PROFILE_IDENTIFIER_LOCATOR));
+        WebDriverSingleton.getWebDriverInstance().findElement(PASSWORD_INPUT_LOCATOR).sendKeys(user.getPassword());
+        WebDriverSingleton.getWebDriverInstance().findElement(NEXT_BUTTON_LOCATOR1).click();
         return new AccountPage();
     }
 

@@ -1,5 +1,6 @@
 package test;
 
+import app.business_objects.Mail;
 import app.business_objects.User;
 import app.pages.AccountPage;
 import app.pages.LoginToGMailPage;
@@ -16,6 +17,7 @@ public class SetLabelToMailTest extends BaseTest {
     public AccountPage accountPage;
     public SentFolderPage sentFolderPage;
     public SentMailPage sentMailPage;
+    public Mail mail;
 
     @Test(description = "loginToAccountTest", priority = 0)
     @Parameters({"username", "password"})
@@ -28,7 +30,7 @@ public class SetLabelToMailTest extends BaseTest {
     @Test(description = "verifySentMail", dependsOnMethods = "loginToAccountTest")
     public void verifySentMail() {
         sentFolderPage = accountPage.openSentMail();
-        boolean isMailSent = sentFolderPage.isMailSent();
+        boolean isMailSent = sentFolderPage.isMailSent(mail);
         Assert.assertTrue(isMailSent, "Mail wasn't sent");
     }
 
