@@ -8,7 +8,7 @@ public class GlobalProperties {
     public static final String CHROME_DRIVER = "webdriver.chrome.driver";
     public static final String PATH = "src/main/resources/chromedriver.exe";
 
-    public static String getURL() {
+    /*public static String getURL() {
         return URL;
     }
 
@@ -18,5 +18,5 @@ public class GlobalProperties {
 
     public static String getPATH() {
         return PATH;
-    }
+    }*/
 }

@@ -23,12 +23,12 @@ public class WriteMailPage extends AbstractPage {
     private static final By DIALOG_WINDOW_LOCATOR = By.xpath(".//div[@role = 'dialog']");
 
     public DraftsFolderPage writeMailAndSaveToDraft(Mail mail) {
-        Waiter.waitForElementPresent(WebDriverSingleton.getWebDriverInstance(),ExpectedConditions.visibilityOfElementLocated(DIALOG_WINDOW_LOCATOR));
-        Waiter.waitForElementPresent(WebDriverSingleton.getWebDriverInstance(), ExpectedConditions.visibilityOfElementLocated(TO_FIELD_LOCATOR));
+        Waiter.waitForElementPresent(ExpectedConditions.visibilityOfElementLocated(DIALOG_WINDOW_LOCATOR));
+        Waiter.waitForElementPresent(ExpectedConditions.visibilityOfElementLocated(TO_FIELD_LOCATOR));
         WebDriverSingleton.getWebDriverInstance().findElement(TO_FIELD_LOCATOR).sendKeys(mail.getRecipient());
         WebDriverSingleton.getWebDriverInstance().findElement(SUBJECT_FIELD_LOCATOR).sendKeys(mail.getSubject());
         WebDriverSingleton.getWebDriverInstance().findElement(BODY_FIELD_LOCATOR).sendKeys(mail.getBody());
-        Waiter.waitForElementPresent(WebDriverSingleton.getWebDriverInstance(), ExpectedConditions.visibilityOfElementLocated(SAVING_LABEL_LOCATOR));
+        Waiter.waitForElementPresent(ExpectedConditions.visibilityOfElementLocated(SAVING_LABEL_LOCATOR));
         WebDriverSingleton.getWebDriverInstance().findElement(CLOSE_WRITE_MAIL_WINDOW_LOCATOR).click();
         WebDriverSingleton.getWebDriverInstance().findElement(DRAFTS_FOLDER_LOCATOR).click();
         return new DraftsFolderPage();
@@ -48,7 +48,7 @@ public class WriteMailPage extends AbstractPage {
 
     public AccountPage sendMail() {
         WebDriverSingleton.getWebDriverInstance().findElement(SEND_MAIL_BUTTON_LOCATOR).click();
-        Waiter.waitForElementPresent(WebDriverSingleton.getWebDriverInstance(), ExpectedConditions.visibilityOfElementLocated(MAIL_IS_SENT_LOCATOR));
+        Waiter.waitForElementPresent(ExpectedConditions.visibilityOfElementLocated(MAIL_IS_SENT_LOCATOR));
         Logger.info("Mail was successfully sent");
         return new AccountPage();
     }
